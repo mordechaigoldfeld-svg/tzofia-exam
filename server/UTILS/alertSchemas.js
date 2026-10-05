@@ -12,3 +12,16 @@ export const createAlertSchema = z.object({
     lat: z.number().min(-180).max(180)
 
 })
+
+
+export const updateAlertSchema = z.object({
+
+    displayName: z.string({ error: 'invalid display name' }).min(1).optional(),
+    description: z.string({ error: 'invalid description' }).min(1).optional(),
+    priority: z.enum(['Low', 'Medium', 'High', 'Critical']).optional(),
+    arena: z.enum(['North', 'South', 'Center']).optional(),
+    status: z.enum(['Active', 'Handled']).optional(),
+    lon: z.number().min(-90).max(90).optional(),
+    lat: z.number().min(-180).max(180).optional()
+
+})

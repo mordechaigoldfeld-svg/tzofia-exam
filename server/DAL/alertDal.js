@@ -58,6 +58,5 @@ export async function deleteAlert(id) {
 
 
 
-// console.log(await insertAlert({test:"test"}));
 
 
