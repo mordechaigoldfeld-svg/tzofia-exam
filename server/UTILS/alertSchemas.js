@@ -3,8 +3,8 @@ import { z } from 'zod'
 
 export const createAlertSchema = z.object({
 
-    displayName: z.string().min(1),
-    description: z.string().min(1),
+    displayName: z.string({ error: 'invalid display name' }).min(1),
+    description: z.string({ error: 'invalid description' }).min(1),
     priority: z.enum(['Low', 'Medium', 'High', 'Critical']),
     arena: z.enum(['North', 'South', 'Center']),
     status: z.enum(['Active', 'Handled']),
