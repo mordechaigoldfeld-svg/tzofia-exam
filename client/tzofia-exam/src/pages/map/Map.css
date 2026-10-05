@@ -4,12 +4,35 @@
     display: grid;
     grid-template-rows: 1fr 9fr;
     height: 100vh;
+    
 }
 
 .map-nav {
     background-color: aqua;
+    display: flex;
+    justify-content: space-between;
 }
 
 .map-main {
-    background-color: lightgreen;
+   background-color: lightgreen;
+   display: grid;
+   grid-template-columns: 4fr 6fr;
+
+   
+   
+    
+}
+.alerts-list{
+    background-color: blue;
+}
+.map-box{
+    padding: 15px;
+    background-color: red;
+}
+.li{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
 }

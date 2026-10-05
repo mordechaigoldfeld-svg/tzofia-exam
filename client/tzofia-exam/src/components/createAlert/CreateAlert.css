@@ -1,0 +1,11 @@
+.alert-sidebar{
+     display: flex;
+     justify-content: space-between;
+    align-items: center;
+    border: 3px solid black;
+}
+.alert-title{
+
+    display: flex;
+
+}
