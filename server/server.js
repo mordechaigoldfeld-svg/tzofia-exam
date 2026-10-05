@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import 'dotenv/config'
+import alertRouter from './ROUTES/alertRoute.js'
 
 const PORT = process.env.PORT
 
@@ -15,6 +16,8 @@ app.use(cors({
 }))
 app.use(helmet())
 
+
+app.use("/api", alertRouter)
 
 
 
