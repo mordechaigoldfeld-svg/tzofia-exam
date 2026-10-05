@@ -52,7 +52,12 @@ export async function updateAlert(id,updateFields) {
 export async function deleteAlert(id) {
 
     return await alerts.deleteOne({_id:new ObjectId(id)})
-
+    
 }
+
+
+
+
+// console.log(await insertAlert({test:"test"}));
 
 

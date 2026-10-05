@@ -1,5 +1,5 @@
 import { getAllAlerts } from "../DAL/alertDal.js";
-import { getAlertByIdService,createAlertService } from "../SERVICE/alertService.js";
+import { getAlertByIdService, createAlertService, deleteAlertService } from "../SERVICE/alertService.js";
 
 
 
@@ -42,7 +42,7 @@ export async function getAllAlertsCntrl(req, res) {
 
 export async function createAlertCntrl(req, res) {
 
-  
+
 
     try {
 
@@ -58,4 +58,26 @@ export async function createAlertCntrl(req, res) {
         res.status(500).json({ success: false, message: error })
     }
 
+}
+
+
+export async function deleteAlertCntrl(req, res) {
+
+    const { id } = req.params
+    
+
+
+    try {
+
+        const alert = await deleteAlertService(id);
+
+        res.status(200).json({ success: true, message: alert })
+
+    } catch (error) {
+        if (error.message) {
+
+            res.status(error.statusCode || 500).json({ success: false, message: error.message })
+        }
+        res.status(500).json({ success: false, message: error })
+    }
 }

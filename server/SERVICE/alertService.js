@@ -1,4 +1,4 @@
-import { getAlertById, insertAlert } from "../DAL/alertDal.js";
+import { deleteAlert, getAlertById, insertAlert } from "../DAL/alertDal.js";
 import { createError } from "../UTILS/createError.js";
 
 
@@ -19,4 +19,13 @@ export async function createAlertService(body) {
     const newAlert = await insertAlert(body)
     return "alert successfuly  craeted "
 
+}
+
+
+
+export async function deleteAlertService(id) {
+
+    const alert = await deleteAlert(id)
+    if(alert.deletedCount !== 1) throw createError(404,'alert not found')
+    return "alert successfuly deleted"
 }
