@@ -7,7 +7,7 @@ import CreateAlert from '../../components/createAlert/CreateAlert'
 import type { createAlert } from '../../types/alertType'
 import { useAuthStore } from '../../store/useUserStore'
 import { useNavigate } from 'react-router'
-
+import { alertMsg } from '../../utils/alertFunct.ts'
 
 
 export default function Map() {
@@ -18,6 +18,7 @@ export default function Map() {
     const [error, setError] = useState<string | null>(null)
     const [editingAlert, setEditingAlert] = useState<createAlert | null>(null)
     const [createMode, setCreateMode] = useState(false)
+    const[critical,setCritical] = useState(false)
     const navigate = useNavigate()
     const user = useAuthStore(s => s.user)
     const logout = useAuthStore(s => s.logout)
@@ -30,6 +31,19 @@ export default function Map() {
 
             const alerts = await getALLAlertsApi()
             setAlerts(alerts)
+
+
+            const isCritical = alertMsg(alerts)
+                 
+            if(isCritical){    
+                
+                setCritical(true)
+            }else{
+                
+                
+                setCritical(false)
+            }
+            console.log(critical);
 
         } catch (error: any) {
             setError(error.response?.data || `error please check your email or password: ${error}`)
@@ -149,6 +163,7 @@ export default function Map() {
                 <div className='map-box'>
                     {loading && (<div ><p>loading...</p></div>)}
                     {error && (<p style={{ color: "red", margin: 0 }}>{error}</p>)}
+                    {critical && (<h1 style={{ color: "red", margin: 0 }}>{"התראת התקפה רב זירתית"}</h1>)}
 
                     {(createMode || editingAlert) && (
 
