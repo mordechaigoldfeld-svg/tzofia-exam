@@ -40,3 +40,12 @@
     border-bottom: 1px solid #e2e8f0;
     
 }
+
+.open-window{
+
+    z-index: 1000;
+    position: fixed;
+    direction: rtl;
+    background-color: lightsalmon;
+   
+}

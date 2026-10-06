@@ -32,10 +32,10 @@ export async function deleteById(id) {
     return await users.deleteOne({ _id: new ObjectId(id) })
 }
 
-export async function updateUser(id, updateFields) {
+// export async function updateUser(id, updateFields) {
 
-    return await users.updateOne({ _id: new ObjectId(id) }, { $set: updateFields })
+//     return await users.updateOne({ _id: new ObjectId(id) }, { $set: updateFields })
 
-}
+// }
 
 

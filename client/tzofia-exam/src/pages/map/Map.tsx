@@ -89,7 +89,7 @@ export default function Map() {
                         <option value="North">צפון</option>
                     </select>
                     <input type="text" placeholder='חפש לפי שם איזור...' value={filtered} onChange={(e) => setFiltered(e.target.value)} />
-                    <label>חיפוש חופשי:</label>
+                    <label> (סטטוס,דחיפות,אזור)חיפוש חופשי:</label>
                 </div>
                 <div>
                     <button onClick={() => setCreateMode(true)}>הוספת דיווח</button>
@@ -112,17 +112,18 @@ export default function Map() {
 
                     {(createMode || editingAlert) && (
 
-                        <CreateAlert initialData={editingAlert}
-                            onClose={() => {
-                                setEditingAlert(null)
-                                setCreateMode(false)
-                            }} onSuccess={
-                                () => {
+                        <div className='open-window'>
+                            <CreateAlert initialData={editingAlert}
+                                onClose={() => {
                                     setEditingAlert(null)
                                     setCreateMode(false)
-                                    loadData()
-                                }} />
-
+                                }} onSuccess={
+                                    () => {
+                                        setEditingAlert(null)
+                                        setCreateMode(false)
+                                        loadData()
+                                    }} />
+                        </div>
                     )}
                     <AlertsMap alerts={displayedalerts} height={600} />
 

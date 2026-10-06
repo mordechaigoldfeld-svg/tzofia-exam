@@ -14,3 +14,5 @@ router.post("/login",validLoginFields,loginCntrl)
 router.get("/me",AuthTokenValidator,getByIdCntrl)
 
 router.delete("/users/:Id",deleteByIdCntrl)
+
+
