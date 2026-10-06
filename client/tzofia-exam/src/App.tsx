@@ -17,13 +17,15 @@ function App() {
     <>
       <Routes>
 
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
 
-        <Route element={<Protected />}>
+        <Route element={<Protected/>}>
           <Route path="/register" element={<Register />} />
           <Route path="/map" element={<Map />} />
         </Route>
-    <Route path="*" element={"not found"}/>
+
+        <Route path="*" element={"not found"} />
+
       </Routes>
 
     </>

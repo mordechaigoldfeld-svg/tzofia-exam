@@ -1,7 +1,21 @@
-import React from 'react'
+import { Navigate, Outlet } from "react-router"
+import { useAuthStore } from "../../store/useUserStore.ts"
+
+
 
 export default function Protected() {
-  return (
-    <div>Protected</div>
-  )
+
+    const token = useAuthStore(s => s.token)
+
+
+    if (!token || token.trim() === '') {
+
+        return <Navigate to='/login' replace />
+    }
+
+    return (
+        <div>
+            <Outlet />
+        </div>
+    )
 }
