@@ -1,4 +1,4 @@
-import { deleteById, findByEmail, findById, insertUser, updateUser } from "../DAL/usersDal.js";
+import { deleteById, findByEmail, findById, insertUser } from "../DAL/usersDal.js";
 import { createUserModel, returnUserWhithoutPass } from "../Models/userModels.js";
 import { createError } from "../UTILS/createError.js";
 import { hashPassGenerate, passwordVerify } from "../UTILS/password_config.js";
@@ -23,6 +23,8 @@ export async function loginService(body) {
 
 export async function registerUser(body) {
     const { email, password, role, username, assignedArena } = body
+    
+    
     const exists = await findByEmail(email)
 
     if (exists) throw createError(400, 'user alrredy exists');

@@ -1,4 +1,4 @@
-import { deleteByIdCntrl, getByIdCntrl, loginCntrl, registerCntrl } from "../CONTROLER/userCntrl.js";
+import { deleteByIdCntrl, getAllUsers, getByIdCntrl, loginCntrl, registerCntrl } from "../CONTROLER/userCntrl.js";
 import express from 'express'
 import { validCreateFields, validLoginFields } from "../MIDDLEWEAR/userMiddle.js";
 import { AuthTokenValidator } from "../MIDDLEWEAR/authMiddle.js";
@@ -15,4 +15,4 @@ router.get("/me",AuthTokenValidator,getByIdCntrl)
 
 router.delete("/users/:Id",deleteByIdCntrl)
 
-
+router.get("/users",getAllUsers)

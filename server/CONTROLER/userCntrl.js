@@ -1,4 +1,5 @@
-import { deleteByIdService, getByIdService, loginService, registerUser, updateUserService } from "../SERVICE/userService.js";
+import { getALL } from "../DAL/usersDal.js";
+import { deleteByIdService, getByIdService, loginService, registerUser, } from "../SERVICE/userService.js";
 
 
 
@@ -96,22 +97,24 @@ export async function deleteByIdCntrl(req, res) {
 
 
 
+export async function getAllUsers(req,res) {
 
+     try {
 
-export async function updateUserCntrl(req, res) {
-
-
-    try {
+        const result = await getALL()
         
-        const result = await updateUserService(req.body)
-        return res.status(201).json({ success: true, messsage: result })
+        
+        res.status(200).json({ success: true, message: result })
 
     } catch (error) {
         if (error.message) {
-            return res.status(error.statusCode).json({ success: false, message: error.message })
+            return res.status(error.statusCode || 500).json({ success: false, message: error.message })
         }
         console.log(error);
 
         res.status(500).json({ success: false, error })
     }
+
+    
 }
+

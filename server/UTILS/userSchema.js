@@ -10,6 +10,8 @@ export const createUserSchema = z.object({
     email: z.email(),
     role: z.enum(['admin', 'general_user','arena_user']),
     assignedArena:z.enum(['North','Center','South','All'])
+
+
 }).strict()
 
 

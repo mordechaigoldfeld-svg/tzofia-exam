@@ -50,10 +50,24 @@ export default function Map() {
 
 
     // const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority === filtered || i.arena === filtered)
-    const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority.includes(filtered) || i.arena.includes(filtered) || i.status.includes(filtered))
+
+    // const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority.includes(filtered) || i.arena.includes(filtered) || i.status.includes(filtered))
 
 
+    function display(filtered) {
+        if (user?.role === 'arena_user') {
+            return alerts.filter((a) => {
+                return a.arena === user.assignedArena
+            })
+        } else {
+            if (filtered === 'all') {
+                return alerts
+            }
+            return alerts.filter((i) => i.priority.includes(filtered) || i.arena.includes(filtered) || i.status.includes(filtered))
+        }
+    }
 
+    const displayedalerts = display(filtered)
 
 
     const editHandler = (alert) => {
@@ -88,28 +102,36 @@ export default function Map() {
         <div className='map-grid'>
 
             <div className="map-nav">
-                <div>
-                    <label>סינון לפי דחיפות/איזור:</label>
-                    <select value={filtered} onChange={(e: any) => setFiltered(e.target.value)}>
-                        <option value="all">הכל</option>
-                        <option value="Critical">דחיפות שיא</option>
-                        <option value="High">דחיפות גבוהה</option>
-                        <option value="Medium">דחוף</option>
-                        <option value="Low">דחיפות קלה</option>
-                        <option value="Center">מרכז</option>
-                        <option value="South">דרום</option>
-                        <option value="North">צפון</option>
-                    </select>
-                    <input type="text" placeholder='חפש לפי שם איזור...' value={filtered} onChange={(e) => setFiltered(e.target.value)} />
-                    <label> (סטטוס,דחיפות,אזור)חיפוש חופשי:</label>
-                </div>
+                {(user?.role === 'admin' || user?.role === 'general_user') && (
+
+                    <div>
+                        <label>סינון לפי דחיפות/איזור:</label>
+                        <select value={filtered} onChange={(e: any) => setFiltered(e.target.value)}>
+                            <option value="all">הכל</option>
+                            <option value="Critical">דחיפות שיא</option>
+                            <option value="High">דחיפות גבוהה</option>
+                            <option value="Medium">דחוף</option>
+                            <option value="Low">דחיפות קלה</option>
+                            <option value="Center">מרכז</option>
+                            <option value="South">דרום</option>
+                            <option value="North">צפון</option>
+                        </select>
+                        <input type="text" placeholder='חפש לפי שם איזור...' value={filtered} onChange={(e) => setFiltered(e.target.value)} />
+                        <label> (סטטוס,דחיפות,אזור)חיפוש חופשי:</label>
+                    </div>
+                )}
                 <div>
                     <h1>{user?.username} :ברוכים הבאים</h1>
                     <p> {user?.role}: תפקיד</p>
                 </div>
                 <div>
+                    {user?.role === 'admin' && (
+
+                        <button onClick={() => navigate('/register')}>עמוד הרשאות</button>
+                    )}
+
                     <button onClick={() => setCreateMode(true)}>הוספת דיווח</button>
-                    <button onClick={() => navigate('/register')}>עמוד הרשאות</button>
+
                     <button onClick={() => logoutHandler()}>יציאה</button>
                 </div>
             </div>

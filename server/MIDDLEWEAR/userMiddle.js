@@ -10,6 +10,8 @@ export function validCreateFields(req, res, next) {
   
     
     const { username, email, password, role,assignedArena } = req.body
+    
+    
     const isValid = createUserSchema.safeParse({ username, email, password, role,assignedArena })
     console.log(isValid);
     
