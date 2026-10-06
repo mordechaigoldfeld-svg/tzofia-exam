@@ -5,6 +5,8 @@ import { deleteAlertApi, getALLAlertsApi } from '../../api/alertApi'
 import AlertDetail, { type MapAlertProps } from '../../components/alertDetail/AlertDetail'
 import CreateAlert from '../../components/createAlert/CreateAlert'
 import type { createAlert } from '../../types/alertType'
+import { useAuthStore } from '../../store/useUserStore'
+import { useNavigate } from 'react-router'
 
 
 
@@ -16,6 +18,9 @@ export default function Map() {
     const [error, setError] = useState<string | null>(null)
     const [editingAlert, setEditingAlert] = useState<createAlert | null>(null)
     const [createMode, setCreateMode] = useState(false)
+    const navigate = useNavigate()
+    const user = useAuthStore(s => s.user)
+    const logout = useAuthStore(s => s.logout)
 
     const loadData = async () => {
 
@@ -72,6 +77,13 @@ export default function Map() {
 
     }
 
+    const logoutHandler = () => {
+
+        logout()
+        navigate('/login')
+
+    }
+
     return (
         <div className='map-grid'>
 
@@ -92,7 +104,13 @@ export default function Map() {
                     <label> (סטטוס,דחיפות,אזור)חיפוש חופשי:</label>
                 </div>
                 <div>
+                    <h1>{user?.username} :ברוכים הבאים</h1>
+                    <p> {user?.role}: תפקיד</p>
+                </div>
+                <div>
                     <button onClick={() => setCreateMode(true)}>הוספת דיווח</button>
+                    <button onClick={() => navigate('/register')}>עמוד הרשאות</button>
+                    <button onClick={() => logoutHandler()}>יציאה</button>
                 </div>
             </div>
             <div className="map-main">

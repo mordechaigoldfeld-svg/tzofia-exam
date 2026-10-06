@@ -3,3 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+Button{
+    cursor: pointer;
+    background-color:rgb(204, 26, 26);
+    color: white;
+    border: 1px solid gray ;
+    border-radius:  6px;
+    padding: 4px 8px;
+}
+
+Button:hover{
+
+    background-color: rgb(102, 27, 53);
+}
