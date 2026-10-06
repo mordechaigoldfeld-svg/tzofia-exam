@@ -22,7 +22,7 @@ export function AuthTokenValidator(req, res, next) {
 
         const token = getBearerToken(authorization)
         const payload = tokenVerify(token)
-        console.log(payload);
+        
 
         req.user = payload
 

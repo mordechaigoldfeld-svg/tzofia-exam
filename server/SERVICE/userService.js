@@ -1,4 +1,4 @@
-import { findByEmail, findById, insertUser } from "../DAL/usersDal.js";
+import { deleteById, findByEmail, findById, insertUser } from "../DAL/usersDal.js";
 import { createUserModel, returnUserWhithoutPass } from "../Models/userModels.js";
 import { createError } from "../UTILS/createError.js";
 import { hashPassGenerate, passwordVerify } from "../UTILS/password_config.js";
@@ -48,5 +48,17 @@ export async function getByIdService(id) {
     return {...returnUserWhithoutPass(user)}
 
 }
+
+
+export async function deleteByIdService(id) {
+
+    const user = await findById(id)
+    if (!user) throw createError(404, 'user not found');
+    await deleteById(id)
+    return 'user succesfuly deleted'
+
+}
+
+
 
 

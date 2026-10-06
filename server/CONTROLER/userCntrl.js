@@ -1,4 +1,4 @@
-import { getByIdService, loginService, registerUser } from "../SERVICE/userService.js";
+import { deleteByIdService, getByIdService, loginService, registerUser } from "../SERVICE/userService.js";
 
 
 
@@ -52,6 +52,32 @@ export async function getByIdCntrl(req, res) {
     try {
 
         const result = await getByIdService(userId)
+        
+        
+        res.status(200).json({ success: true, message: result })
+
+    } catch (error) {
+        if (error.message) {
+            return res.status(error.statusCode || 500).json({ success: false, message: error.message })
+        }
+        console.log(error);
+
+        res.status(500).json({ success: false, error })
+    }
+
+}
+
+
+
+
+export async function deleteByIdCntrl(req, res) {
+
+    const {Id} = req.params
+
+    
+    try {
+
+        const result = await deleteByIdService(Id)
         
         
         res.status(200).json({ success: true, message: result })
