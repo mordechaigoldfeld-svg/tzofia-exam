@@ -44,7 +44,11 @@ export default function Map() {
 
 
 
-    const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority === filtered)
+    // const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority === filtered || i.arena === filtered)
+    const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority.includes(filtered) || i.arena.includes(filtered) || i.status.includes(filtered))
+
+
+
 
 
     const editHandler = (alert) => {
@@ -56,7 +60,7 @@ export default function Map() {
     const deleteHandle = async (alertId: string) => {
 
         try {
-        
+
 
             const res = await deleteAlertApi(alertId)
             loadData()
@@ -73,14 +77,19 @@ export default function Map() {
 
             <div className="map-nav">
                 <div>
-                    <label>דחיפות:</label>
+                    <label>סינון לפי דחיפות/איזור:</label>
                     <select value={filtered} onChange={(e: any) => setFiltered(e.target.value)}>
                         <option value="all">הכל</option>
                         <option value="Critical">דחיפות שיא</option>
                         <option value="High">דחיפות גבוהה</option>
                         <option value="Medium">דחוף</option>
                         <option value="Low">דחיפות קלה</option>
+                        <option value="Center">מרכז</option>
+                        <option value="South">דרום</option>
+                        <option value="North">צפון</option>
                     </select>
+                    <input type="text" placeholder='חפש לפי שם איזור...' value={filtered} onChange={(e) => setFiltered(e.target.value)} />
+                    <label>חיפוש חופשי:</label>
                 </div>
                 <div>
                     <button onClick={() => setCreateMode(true)}>הוספת דיווח</button>
@@ -90,7 +99,7 @@ export default function Map() {
                 <div className='alerts-list'>
                     <h2>all alerts</h2>
                     <ul>
-                        {alerts.map((a) => (
+                        {displayedalerts.map((a) => (
                             <li className='li' key={a._id}>
                                 <AlertDetail alert={a} updateMode={editHandler} onDelete={deleteHandle} />
                             </li>
