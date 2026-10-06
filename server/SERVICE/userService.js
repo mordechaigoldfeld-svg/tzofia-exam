@@ -1,4 +1,4 @@
-import { findByEmail, insertUser } from "../DAL/usersDal.js";
+import { findByEmail, findById, insertUser } from "../DAL/usersDal.js";
 import { createUserModel, returnUserWhithoutPass } from "../Models/userModels.js";
 import { createError } from "../UTILS/createError.js";
 import { hashPassGenerate, passwordVerify } from "../UTILS/password_config.js";
@@ -41,10 +41,12 @@ export async function registerUser(body) {
 }
 
 
-// console.log(await registerUser( {
-//         username:"moty",
-//         email:"test@gmail.com",
-//         password:"123",
-//         role:'admin',
-//         assignedArea:"all"
-//     }));
+export async function getByIdService(id) {
+
+    const user = await findById(id)
+    if (!user) throw createError(404, 'user not found');
+    return {...returnUserWhithoutPass(user)}
+
+}
+
+
