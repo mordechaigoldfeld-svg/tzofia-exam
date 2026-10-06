@@ -3,6 +3,8 @@ import cors from 'cors'
 import helmet from 'helmet'
 import 'dotenv/config'
 import alertRouter from './ROUTES/alertRoute.js'
+import userRouter from './ROUTES/userRouter.js'
+
 
 const PORT = process.env.PORT
 
@@ -18,6 +20,8 @@ app.use(helmet())
 
 
 app.use("/api", alertRouter)
+
+app.use("/api/auth",userRouter)
 
 
 
