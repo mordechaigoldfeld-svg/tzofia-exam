@@ -11,7 +11,7 @@ export const createAlertSchema = z.object({
     lon: z.number().min(-90).max(90),
     lat: z.number().min(-180).max(180)
 
-})
+}).strict()
 
 
 export const updateAlertSchema = z.object({
@@ -24,4 +24,4 @@ export const updateAlertSchema = z.object({
     lon: z.number().min(-90).max(90).optional(),
     lat: z.number().min(-180).max(180).optional()
 
-})
+}).strict()

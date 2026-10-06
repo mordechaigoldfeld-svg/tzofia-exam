@@ -20,14 +20,16 @@ interface alertProps{
 }
 
 export default function AlertDetail({alert,updateMode,onDelete}:alertProps) {
+    console.log(alert);
+    
     return (
         <div>
             <div>
             <h1>{alert.displayName}</h1>
             <h3>{alert.priority}</h3>
             <p>{alert.description}</p>
-            <p>created at: {alert.createdAt}</p>
-            <p>updated at: {alert.updatedAt}</p>
+            <p>created at: {new Date (alert.createdAt).toLocaleString()}</p>
+            <p>updated at: {alert.updatedAt ? new Date(alert.updatedAt).toLocaleString() : 'not updated'}</p>
             </div>
             <div>
                 <button onClick={()=>updateMode(alert)}>עדכן</button>

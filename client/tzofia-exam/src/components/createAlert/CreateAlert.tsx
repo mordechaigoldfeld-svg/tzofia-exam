@@ -34,9 +34,9 @@ export default function CreateAlert({ onClose, onSuccess, initialData }: AlertFo
         } else {
             setDisplayName('')
             setDescription('')
-            setPriority('')
-            setArena('')
-            setStatus('')
+            setPriority('Critical')
+            setArena('Center')
+            setStatus('Active')
         }
 
     }, [initialData])

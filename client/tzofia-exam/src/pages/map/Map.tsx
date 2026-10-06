@@ -15,7 +15,7 @@ export default function Map() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [editingAlert, setEditingAlert] = useState<createAlert | null>(null)
-    const [createMode,setCreateMode] = useState(false)
+    const [createMode, setCreateMode] = useState(false)
 
     const loadData = async () => {
 
@@ -47,26 +47,26 @@ export default function Map() {
     const displayedalerts = filtered === 'all' ? alerts : alerts.filter((i) => i.priority === filtered)
 
 
-    const editHandler = (alert)=>{
+    const editHandler = (alert) => {
 
         setEditingAlert(alert)
     }
 
 
-     const deleteHandle = async (alertId: string) => {
+    const deleteHandle = async (alertId: string) => {
 
-    try {
-        console.log("id",alertId);
+        try {
         
-      const res = await deleteAlertApi(alertId)
-      loadData()
 
-    } catch (error: any) {
-      setError(error.response?.data.message || `error please check your email or password: ${error}`)
-      console.log('login failed', error);
+            const res = await deleteAlertApi(alertId)
+            loadData()
+
+        } catch (error: any) {
+            setError(error.response?.data.message || `error please check your email or password: ${error}`)
+            console.log('login failed', error);
+        }
+
     }
-
-  }
 
     return (
         <div className='map-grid'>
@@ -83,7 +83,7 @@ export default function Map() {
                     </select>
                 </div>
                 <div>
-                    <button onClick={()=> setCreateMode(true)}>הוספת דיווח</button>
+                    <button onClick={() => setCreateMode(true)}>הוספת דיווח</button>
                 </div>
             </div>
             <div className="map-main">
@@ -101,19 +101,20 @@ export default function Map() {
                     {loading && (<div ><p>loading...</p></div>)}
                     {error && (<p style={{ color: "red", margin: 0 }}>{error}</p>)}
 
-                    {(createMode || editingAlert) &&(
+                    {(createMode || editingAlert) && (
 
-                        <CreateAlert initialData={editingAlert} 
-                        onClose={() => {
-                            setEditingAlert(null)
-                            setCreateMode(false)
-                        }} onSuccess={
-                            () => {
+                        <CreateAlert initialData={editingAlert}
+                            onClose={() => {
                                 setEditingAlert(null)
-                                loadData()
-                            } }/>
+                                setCreateMode(false)
+                            }} onSuccess={
+                                () => {
+                                    setEditingAlert(null)
+                                    setCreateMode(false)
+                                    loadData()
+                                }} />
 
-                    ) }
+                    )}
                     <AlertsMap alerts={displayedalerts} height={600} />
 
                 </div>

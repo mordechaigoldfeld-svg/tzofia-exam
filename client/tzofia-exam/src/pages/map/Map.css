@@ -17,6 +17,7 @@
    background-color: lightgreen;
    display: grid;
    grid-template-columns: 4fr 6fr;
+   overflow: auto;
 
    
    
@@ -24,10 +25,12 @@
 }
 .alerts-list{
     background-color: blue;
+    overflow: auto;
 }
 .map-box{
     padding: 15px;
-    background-color: red;
+    /* background-color: red; */
+    overflow: auto;
 }
 .li{
     display:flex;
@@ -35,4 +38,5 @@
     align-items: center;
     padding: 10px 14px;
     border-bottom: 1px solid #e2e8f0;
+    
 }
