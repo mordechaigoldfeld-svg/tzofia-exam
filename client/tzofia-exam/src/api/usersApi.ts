@@ -8,18 +8,20 @@ import type { loginType, registerType } from "../types/userTypes.ts";
 
 
 export async function registerApi(body: registerType) {
-
-    const register = await instanceUser.post('/auth/register', {
+    console.log(body);
+    
+    const register = await instanceUser.post('/register', {
         email: body.email,
         password: body.password,
         role: body.role,
         username: body.username,
-        assignedArea: body.assignedArena
+        assignedArena: body.assignedArena
     })
 
     return register.data
 
 }
+// console.log(await registerApi({password: '12345', username: ' js.kjs sj., ', email: 'test@gmail.com', role: 'arena_user', assignedArena: 'North'}));
 
 
 export async function loginApi(body: loginType) {
